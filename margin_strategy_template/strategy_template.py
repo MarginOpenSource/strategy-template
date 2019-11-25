@@ -34,6 +34,7 @@ the StrategyBase class.
 
 class Strategy(StrategyBase):
     def __init__(self) -> None:
+        super(Strategy, self).__init__()
         self.waiting_order_id = 0
         self.waiting_cancel_order_id = None
         self.strategy_state = dict()
