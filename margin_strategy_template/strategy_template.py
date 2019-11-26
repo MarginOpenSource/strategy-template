@@ -60,6 +60,7 @@ class Strategy(StrategyBase):
                                    StrategyConfig.TICKER,
                                    StrategyConfig.PUBLIC_TRADE_HISTORY,
                                    StrategyConfig.FUNDS}
+        s.normalize_exchange_buy_amounts = True
         return s
 
     """
@@ -99,10 +100,10 @@ class Strategy(StrategyBase):
         # make sure amount is rounded by exchange standards
         amount = tcm.round_amount(amount, RoundingType.ROUND)
         # example checks for order validity
-        # (is_order_valid also does the min/max comparisons)
+        # (is_limit_order_valid also does the min/max comparisons)
         assert(tcm.get_min_buy_amount(price) <= amount)
         assert(tcm.get_max_buy_amount(price) >= amount)
-        assert(tcm.is_order_valid(buy, amount, price))
+        assert(tcm.is_limit_order_valid(buy, amount, price))
         # Uncomment to activate the order placing
         # self.waiting_order_id = self.place_limit_order(buy, amount, price)
 
